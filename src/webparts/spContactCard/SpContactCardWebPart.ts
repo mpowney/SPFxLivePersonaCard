@@ -12,7 +12,10 @@ import SPFxPeopleCard, { IPeopleCardProps } from './components/SPFXPeopleCard/SP
 import { PersonaSize, PersonaInitialsColor } from 'office-ui-fabric-react';
 
 export interface ISpContactCardWebPartProps {
-  description: string;
+  contactDisplayName: string;
+  contact: string;
+  detailLine1: string;
+  detailLine2: string;
 }
 
 export default class SpContactCardWebPart extends BaseClientSideWebPart<ISpContactCardWebPartProps> {
@@ -25,14 +28,16 @@ export default class SpContactCardWebPart extends BaseClientSideWebPart<ISpConta
   public render(): void {
     const element: React.ReactElement<IPeopleCardProps> = React.createElement(
       SPFxPeopleCard, {  
-        primaryText: this.context.pageContext.user.displayName,
-        email: this.context.pageContext.user.email ? this.context.pageContext.user.email : this.context.pageContext.user.loginName,
+        primaryText: this.properties.contactDisplayName && this.properties.contactDisplayName.length > 0 ? this.properties.contactDisplayName :
+                      this.context.pageContext.user.displayName,
+        email: this.properties.contact && this.properties.contact.length > 0 ? this.properties.contact : 
+                  this.context.pageContext.user.email ? this.context.pageContext.user.email : this.context.pageContext.user.loginName,
         serviceScope: this.context.serviceScope,
         class: 'persona-card',
         size: PersonaSize.extraLarge,
         initialsColor: PersonaInitialsColor.darkBlue,
         //moreDetail: this.personaDetail(), /* pass react element */
-        moreDetail: '<div>detail1 <br/> detail2</div>', /* pass html string */
+        moreDetail: `<div>${this.properties.detailLine1}<br/>${this.properties.detailLine2}</div>`, /* pass html string */
         onCardOpenCallback: ()=>{
           console.log('WebPart','on card open callaback');
         },
@@ -60,8 +65,17 @@ export default class SpContactCardWebPart extends BaseClientSideWebPart<ISpConta
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('contactDisplayName', {
+                  label: strings.ContactDisplayNameFieldLabel
+                }),
+                PropertyPaneTextField('contact', {
+                  label: strings.ContactFieldLabel
+                }),
+                PropertyPaneTextField('detailLine1', {
+                  label: strings.DetailLine1FieldLabel
+                }),
+                PropertyPaneTextField('detailLine2', {
+                  label: strings.DetailLine2FieldLabel
                 })
               ]
             }

@@ -1,7 +1,10 @@
 declare interface ISpContactCardWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
-  DescriptionFieldLabel: string;
+  ContactFieldLabel: string;
+  ContactDisplayNameFieldLabel: string;
+  DetailLine1FieldLabel: string;
+  DetailLine2FieldLabel: string;
 }
 
 declare module 'SpContactCardWebPartStrings' {

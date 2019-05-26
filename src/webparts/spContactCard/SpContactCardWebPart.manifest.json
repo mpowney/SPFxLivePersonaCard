@@ -16,11 +16,11 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "SpContactCard" },
-    "description": { "default": "SharePoint online people card" },
-    "officeFabricIconFontName": "Page",
+    "title": { "default": "Modern Contact Card" },
+    "description": { "default": "This web part applies the modern experience to a contact card" },
+    "officeFabricIconFontName": "People",
     "properties": {
-      "description": "SpContactCard"
+      "contact": ""
     }
   }]
 }
